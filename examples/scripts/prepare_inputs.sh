@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#FIXME This script is very basic. Between other things, it assume that
+#the simulated period will start and end in the same day.
+
 set -euo pipefail
 
 function check_if_not_present () {
@@ -32,7 +35,8 @@ if check_if_not_present ${NOAADATA} ; then
        --year ${YEAR} --month ${MONTH} --day ${DAY} --hour ${HOUR}\
        --target-directory /gfs/model_data\
        --semaphore-file /gfs/.__success__\
-       --requested-resolution ${REQUESTED_RESOLUTION}
+       --requested-resolution ${REQUESTED_RESOLUTION}\
+       --forecast-hour ${END_HOUR}
 fi
 
 RUNID=`date -u +"run-%F_%H-%M-%S"`
